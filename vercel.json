@@ -1,8 +1,9 @@
 {
-    "version": 2,
-    "builds": [
+    "routes": [
         {
-            "src": "server.js"
+            "src": "/(.*)",
+            "dest": "/server.js"
         }
-    ]
+    ],
+    "version": 2
 }
