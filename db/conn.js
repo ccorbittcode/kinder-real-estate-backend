@@ -4,8 +4,6 @@ let _db;
 
 export default async function connectToServer() {
     const Db = process.env.VITE_ATLAS_URI;
-    //configuring the proxy agent
-    const proxyAgent = new HttpsProxyAgent(process.env.QUOTAGUARDSTATIC_URL);
     const client = new MongoClient(Db);
 
     try {
