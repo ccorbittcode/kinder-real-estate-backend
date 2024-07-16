@@ -5,25 +5,32 @@ import dotenv from "dotenv";
 import session from 'express-session';
 import passport from "passport";
 import connectToServer from "./db/conn.js";
-dotenv.config({ path: "../.env"});
+dotenv.config({ path: "../.env" });
 
 const app = express();
 
 // Express.js setup
 app.use(cors({
-    origin: `https://kinder-real-estate-ui.vercel.app`,
-    credentials: true
+  origin: function (origin, callback) {
+    const allowedOrigins = [`https://kinder-real-estate-ui.vercel.app`, `https://kinder-real-estate-backend-2oz6h9l45-chases-projects-2d870ea0.vercel.app`];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy violation'));
+    }
+  },
+  credentials: true
 }));
 app.use(express.json());
 app.use(session({
-    secret: process.env.VITE_PASSPORT_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 86400000, // 24 hours
-      sameSite: 'strict'
+  secret: process.env.VITE_PASSPORT_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 86400000, // 24 hours
+    sameSite: 'strict'
   }
 }));
 
@@ -34,7 +41,7 @@ app.use(passport.session());
 app.use(propertyRoutes);
 
 // Error handling middleware
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.error(err.stack); // Log error stack trace to the console
   res.status(500).send({ error: 'Something went wrong!' }); // Send a 500 response with a custom error message
 });
