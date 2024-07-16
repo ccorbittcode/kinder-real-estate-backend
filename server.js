@@ -13,7 +13,7 @@ const app = express();
 app.use(cors({
   origin: function (origin, callback) {
     // Check if the origin is undefined or matches a pattern
-    if (!origin || /kinder-real-estate-[a-z0-9]+\.vercel\.app$/.test(origin)) {
+    if (!origin || /kinder-real-estate-[a-z0-9-]+\.vercel\.app$/.test(origin)) {
       callback(null, true); // Allow the request if the origin is not set or matches the pattern
     } else {
       callback(new Error('CORS policy violation')); // Block the request if the origin does not match the pattern
