@@ -11,7 +11,7 @@ const app = express();
 
 // Express.js setup
 app.use(cors({
-    origin: `https://kinder-real-estate.vercel.app/`,
+    origin: `https://kinder-real-estate.vercel.app`,
     credentials: true
 }));
 app.use(express.json());
