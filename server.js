@@ -12,7 +12,7 @@ const app = express();
 // Express.js setup
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = [`https://kinder-real-estate-ui.vercel.app`, `https://kinder-real-estate-backend-aopb9yqmh-chases-projects-2d870ea0.vercel.app/`];
+    const allowedOrigins = [`https://kinder-real-estate-ui.vercel.app`, `https://kinder-real-estate-backend-green.vercel.app`];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
