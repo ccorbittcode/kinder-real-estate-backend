@@ -73,3 +73,6 @@ connectToServer().then(() => {
   console.error('Failed to connect to the database', err);
   process.exit(1); // Exit process with failure
 });
+
+// Export the Express app for Vercel
+export default app;
