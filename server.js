@@ -9,15 +9,31 @@ dotenv.config({ path: "../.env" });
 
 const app = express();
 
-// Express.js setup
-app.use(cors({
+
+/*app.use(cors({
   origin: (origin, callback) => {
     console.log("Received request from origin:", origin); // Log every incoming origin
     callback(null, true); // Allow every origin
   },
   credentials: true
+}));8 */
+
+// CORS setup
+app.use(cors({
+  origin: function (origin, callback) {
+    console.log("Received request from origin:", origin); // Log every incoming origin
+    const allowedOrigins = [/kinder-real-estate-[a-z0-9-]+\.vercel\.app$/];
+    if (!origin || allowedOrigins.some(pattern => pattern.test(origin))) {
+      callback(null, true); // Allow the request if the origin is not set or matches the pattern
+    } else {
+      console.log("Blocking origin:", origin); // Log blocked origins
+      callback(new Error('CORS policy violation')); // Block the request if the origin does not match the pattern
+    }
+  },
+  credentials: true
 }));
 
+// Express.js setup
 app.use(express.json());
 app.use(session({
   secret: process.env.VITE_PASSPORT_SECRET,
