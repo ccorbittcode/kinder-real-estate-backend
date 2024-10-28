@@ -4,7 +4,13 @@ let _db;
 
 export default async function connectToServer() {
     const Db = process.env.VITE_ATLAS_URI;
-    const client = new MongoClient(Db);
+    const client = new MongoClient(Db, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        tls: true,
+        tlsAllowInvalidCertificates: false,
+        tlsAllowInvalidHostnames: false
+    });
 
     try {
         const db = await client.connect();
@@ -15,6 +21,7 @@ export default async function connectToServer() {
         }
         return _db;
     } catch (err) {
+        console.error("Failed to connect to the database", err);
         throw err;
     }
 }
