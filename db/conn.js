@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 let _db;
 
 export default async function connectToServer() {
-    const Db = process.env.VITE_ATLAS_URI;
+    const Db = process.env.MONGODB_URI;
     const client = new MongoClient(Db, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
