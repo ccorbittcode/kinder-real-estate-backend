@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
 // Error handling middleware
 app.use(function (err, req, res, next) {
   console.error(err.stack); // Log error stack trace to the console
-  res.status(500).send({ error: 'Something went wrong!' }); // Send a 500 response with a custom error message
+  res.status(500).send({ error: err }); // Send a 500 response with a custom error message
 });
 
 // get driver connection
