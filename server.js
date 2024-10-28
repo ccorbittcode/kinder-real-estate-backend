@@ -53,6 +53,11 @@ app.use(passport.session());
 
 app.use(propertyRoutes);
 
+// Define a root route
+app.get('/', (req, res) => {
+  res.send('Welcome to Kinder Real Estate Backend');
+});
+
 // Error handling middleware
 app.use(function (err, req, res, next) {
   console.error(err.stack); // Log error stack trace to the console
